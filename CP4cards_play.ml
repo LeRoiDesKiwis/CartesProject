@@ -15,6 +15,7 @@ type t_card = {color : t_card_color ; rank : t_card_rank} ;;
 let m_card(card_col, card_rank : t_card_color * t_card_rank) : t_card =
   {color = card_col ; rank = card_rank} 
 
+(* Calcul d'un paquet de 52 cartes *)
 (* Question 1 *)
 
 let card_color_of_int(i : int) : t_card_color =
@@ -54,6 +55,7 @@ let init_deck_52() : t_card list =
 	init_deck_52_aux(52)
 ;;
 
+(* Mélange d'un paquet de 52 cartes *)
 (*Question 3*)
 
 let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
@@ -65,3 +67,24 @@ let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
     )
   )
 );;
+
+(* Paramétrage *)
+(* Question 4 *)
+
+type t_param = {cardNB : int ; playerNB : int ; boardNB : int ; cardPerTurnNB : int ; turnNB : int};;
+
+(* Question 4 *)
+let get_cardNB(prm : t_param) : int =
+	prm.cardNB;;
+
+let get_playerNB(prm : t_param) : int =
+	prm.playerNB;;
+
+let get_boardNB(prm : t_param) : int =
+	prm.boardNB;;
+
+let get_cardPerTurnNB(prm : t_param) : int =
+	prm.cardPerTurnNB;;
+
+let get_turnNB(prm : t_param) : int =
+	prm.turnNB;;
