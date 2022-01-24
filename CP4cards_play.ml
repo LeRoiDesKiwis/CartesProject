@@ -57,21 +57,11 @@ let init_deck_52() : t_card list =
 (*Question 3*)
 
 let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
-<<<<<<< HEAD
-  if deck_len = 0
-=======
   if deck_len <= 0
->>>>>>> 09397b1 (question 3 v1)
   then []
   else (
       let index : int = rand_int(0, deck_len-1) in (
         add_fst(shuffle(rem_nth(deck, index), deck_len-1), nth(deck, index))
     )
   )
-<<<<<<< HEAD
 );;
-=======
-);;
-
-let shuffled_deck : t_card list = shuffle(init_deck_52(), 52)
->>>>>>> 09397b1 (question 3 v1)
