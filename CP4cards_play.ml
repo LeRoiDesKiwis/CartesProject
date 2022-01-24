@@ -2,7 +2,7 @@
 (* 1 - Cartes : types et fonction de "creation" *)
 (* -------------------------------------------- *)
 
-#use"/Users/matrix/Documents/Ocaml/APutil.ml";;
+#use"APUtil.ml";;
 
 type t_card_color = HEART | DIAMOND | CLUB | SPADE ;;
 
@@ -14,7 +14,6 @@ type t_card = {color : t_card_color ; rank : t_card_rank} ;;
 
 let m_card(card_col, card_rank : t_card_color * t_card_rank) : t_card =
   {color = card_col ; rank = card_rank} 
-;;
 
 (* Question 1 *)
 
@@ -66,17 +65,3 @@ let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
     )
   )
 );;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
