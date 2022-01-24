@@ -46,4 +46,7 @@ let rec init_deck_52_aux(i : int) : t_card list=
   )
 
 let rec init_deck_52() : t_card list =
-init_deck_52_aux(52)
+init_deck_52_aux(52);;
+
+init_deck_52();;
+
