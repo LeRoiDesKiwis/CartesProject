@@ -341,7 +341,7 @@ let test_fail_exec(step, fct, arg : t_test_step * ('a -> 'b) * 'a) : 'b t_test_r
 ;;
 
 let test_is_success(tres : 'a t_test_result) : bool =
-  let (_, t) : 'a t_test_result = tres in
+  let (_, t) (*: 'a t_test_result*) = tres in
     match t with
       Test_exec_success -> true
       | Test_fail_success(_) -> true
@@ -349,14 +349,14 @@ let test_is_success(tres : 'a t_test_result) : bool =
 ;;
 
 let test_get(t : 'a t_test_result) : 'a =
-  let (res, _) : 'a t_test_result = t in
+  let (res, _) (*: 'a t_test_result *)= t in
     match res with
       Some(e) -> e
       | None -> failwith("Unexpected error, does your call produce a value?")
 ;;
 
 let test_fail_get(res : 'a t_test_result) : string =
-  let (_, t) : 'a t_test_result = res in
+  let (_, t) (*: 'a t_test_result*) = res in
     match t with
       | Test_fail_success(a) -> a
       | _ -> failwith("Unexpected error, do you test success of your test?")
@@ -407,16 +407,16 @@ let rec list_contains_value_aux(l, e : 'a list * 'a) : bool * 'a list =
   if l = []
   then (false, l)
   else
-    let (x, r) : 'a * 'a list = (fst(l), rem_fst(l)) in
+    let (x, r) (*: 'a * 'a list*) = (fst(l), rem_fst(l)) in
       if x = e
       then (true, r)
       else
-        let (b, newr) : bool * 'a list = list_contains_value_aux(r, e) in
+        let (b, newr) (*: bool * 'a list*) = list_contains_value_aux(r, e) in
           (b, add_fst(newr, x))
 ;;
 
 let rec list_contains_value(l, e : 'a list * 'a) : bool =
-  let (b, r) : bool * 'a list = list_contains_value_aux(l, e) in
+  let (b, r) (*: bool * 'a list*) = list_contains_value_aux(l, e) in
     b
 ;; 
 
@@ -424,8 +424,8 @@ let rec list_included_in_list(l1,l2 : 'a list * 'a list) : bool =
   if l1 = []
   then true
   else
-    let (x, r1) : 'a * 'a list = (fst(l1), rem_fst(l1)) in
-    let (b, r2) : bool * 'a list = list_contains_value_aux(l2, x) in
+    let (x, r1) (*: 'a * 'a list*) = (fst(l1), rem_fst(l1)) in
+    let (b, r2) (*: bool * 'a list*) = list_contains_value_aux(l2, x) in
       if b
       then list_included_in_list(r1,r2)
       else false
