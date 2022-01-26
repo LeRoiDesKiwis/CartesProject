@@ -91,4 +91,16 @@ let get_turnNB(prm : t_param) : int =
 
 (* Question 5 *)
 let valid_param(prm : t_param) : bool =
-	(get_cardPerTurnNB(prm) * get_playerNB(prm) * get_turnNB(prm) + get_cardNB(prm)) == get_cardNB(prm);;
+	(get_cardPerTurnNB(prm) * get_playerNB(prm) * get_turnNB(prm) + get_boardNB(prm)) == get_cardNB(prm);;
+
+(* Question 6 *)
+let init_deck(prm : t_param) : t_card list =
+(
+	if get_cardNB(prm) <> 52
+	then failwith("Error : Card number is different from 52")
+	else (
+		if not (valid_param(prm))
+		then failwith("Error : parameters aren't valid")
+		else shuffle(init_deck_52(), 52)
+	)
+);;
