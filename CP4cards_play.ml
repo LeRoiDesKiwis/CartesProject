@@ -88,3 +88,7 @@ let get_cardPerTurnNB(prm : t_param) : int =
 
 let get_turnNB(prm : t_param) : int =
 	prm.turnNB;;
+
+(* Question 5 *)
+let valid_param(prm : t_param) : bool =
+	(get_cardPerTurnNB(prm) * get_playerNB(prm) * get_turnNB(prm) + get_cardNB(prm)) == get_cardNB(prm);;
