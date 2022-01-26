@@ -4,7 +4,7 @@
 (* ---------------------------- *)
 
 #use "CPinter.ml";;
-#use "CP4cards_play.ml";;
+#use "CPutil";;
 
 (* 2 tests pour des valeurs correctes *)
 
