@@ -3,10 +3,7 @@
 (*     card_color_of_int        *)
 (* ---------------------------- *)
 
-<<<<<<< HEAD
-=======
 #use "CPutil.ml";;
->>>>>>> b2aca28 (rewrite test)
 
 (* 2 tests pour des valeurs correctes *)
 
