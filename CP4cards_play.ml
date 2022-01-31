@@ -104,3 +104,8 @@ let init_deck(prm : t_param) : t_card list =
 		else shuffle(init_deck_52(), 52)
 	)
 );;
+
+(* Question 8 *)
+type t_player = {id: int; hand : t_card list ref; cemetery : t_card list ref};;
+let m_player(number : int) : t_player =
+{id: number; cemetery = [] ; hand = []}
