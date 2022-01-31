@@ -111,3 +111,15 @@ type t_player = {id: int; hand : t_card list ref; cemetery : t_card list ref};;
 
 let m_player(number : int) : t_player =
 {id = number; cemetery = ref [] ; hand = ref []}
+
+(* Question *)
+
+let init_player(param : t_param) : t_player array =
+	let player_arr = arr_make(param.playerNB, m_player(0)) in
+	for i = 0 to param.playerNB -1
+	do
+		player_arr.(i) <- m_player(i+1)
+	done;
+	player_arr
+;;
+		
