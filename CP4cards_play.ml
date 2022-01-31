@@ -110,4 +110,4 @@ let init_deck(prm : t_param) : t_card list =
 type t_player = {id: int; hand : t_card list ref; cemetery : t_card list ref};;
 
 let m_player(number : int) : t_player =
-	{id: number; cemetery = [] ; hand = []}
+{id = number; cemetery = ref [] ; hand = ref []}
