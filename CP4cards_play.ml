@@ -93,6 +93,7 @@ let get_turnNB(prm : t_param) : int =
 let valid_param(prm : t_param) : bool =
 	(get_cardPerTurnNB(prm) * get_playerNB(prm) * get_turnNB(prm) + get_boardNB(prm)) == get_cardNB(prm);;
 
+(* Initialisation du deck *)
 (* Question 6 *)
 let init_deck(prm : t_param) : t_card list =
 (
@@ -111,8 +112,8 @@ type t_player = {id: int; hand : t_card list ref; cemetery : t_card list ref};;
 let m_player(number : int) : t_player =
 {id = number; cemetery = ref [] ; hand = ref []}
 
+(* Réalisation des joueurs *)
 (* Question 10 *)
-
 let init_player(param : t_param) : t_player array =
 	let player_arr = arr_make(param.playerNB, m_player(0)) in
 	for i = 0 to param.playerNB -1
