@@ -3,8 +3,10 @@
 (*     card_color_of_int        *)
 (* ---------------------------- *)
 
-#use "CPinter.ml";;
-#use "CPutil";;
+<<<<<<< HEAD
+=======
+#use "CPutil.ml";;
+>>>>>>> b2aca28 (rewrite test)
 
 (* 2 tests pour des valeurs correctes *)
 
@@ -322,16 +324,9 @@ let test_run() : unit =
 
     (* to be completed with the tests defined above *)
     (* when the corresponding functions are developed *)
-    
-    (* test de init_deck_52 *)
-    test_init_deck_52_V1(alltests) ;
-    test_init_deck_52_v2(alltests) ;
-    
-    (* test de shuffle *)
-    test_shuffle_52(alltests) ;
+
 
     (* Print test status at the end *)
     print_test_report(alltests)
     )
 ;;
-
