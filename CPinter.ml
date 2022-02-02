@@ -4,3 +4,5 @@
  *)
 
 #use "CPutil.ml";;
+#use "CP4cards_play.ml";;
+#use "CP4cards_test.ml";;
