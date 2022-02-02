@@ -326,6 +326,8 @@ let test_run() : unit =
     test_card_color_of_int_b(alltests) ;
     test_card_color_of_int_fail_c(alltests) ;
     test_card_color_of_int_fail_d(alltests) ;
+    test_card_color_of_int_a1(alltests) ;
+    test_card_color_of_int_b1(alltests) ;
 
     (* test de card_rank_of_int_52 *)
     test_card_rank_of_int_52_a(alltests) ;
