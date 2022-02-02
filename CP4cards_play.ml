@@ -2,7 +2,7 @@
 (* 1 - Cartes : types et fonction de "creation" *)
 (* -------------------------------------------- *)
 
-#use "APutil.ml";;
+#use "CPutil.ml";;
 
 type t_card_color = HEART | DIAMOND | CLUB | SPADE ;;
 
