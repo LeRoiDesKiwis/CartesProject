@@ -40,7 +40,9 @@ let card_rank_of_int_52(i : int) : t_card_rank =
 ;;
 
 let card_of_int_52(i : int) : t_card =
-	{color = card_color_of_int(((i-1)/13)+1) ; rank = card_rank_of_int_52(((i-1) mod 13)+1)}
+	if i > 52 || i <= 0
+	then failwith("erreur card_of_int_52 : parametre invalide")
+  else {color = card_color_of_int(((i-1)/13)+1) ; rank = card_rank_of_int_52(((i-1) mod 13)+1)}
 ;;
 
 (* Question 2 *)
