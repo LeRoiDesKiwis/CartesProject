@@ -114,7 +114,7 @@ let m_player(number : int) : t_player =
 
 (* Réalisation des joueurs *)
 (* Question 10 *)
-let init_player(param : t_param) : t_player array =
+let init_players(param : t_param) : t_player array =
 	let player_arr = arr_make(param.playerNb, m_player(0)) in
 	for i = 0 to param.playerNb -1
 	do
@@ -122,4 +122,3 @@ let init_player(param : t_param) : t_player array =
 	done;
 	player_arr
 ;;
-		
