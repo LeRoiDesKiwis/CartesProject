@@ -26,6 +26,23 @@ let test_card_color_of_int_b(status : t_test_status) : unit =
     )
 ;;
 
+let test_card_color_of_int_a1(status : t_test_status) : unit = 
+  let test_step : t_test_step = test_start(status,"card_color_of_int_a1") in
+  let test_result : t_card_color t_test_result = test_exec(test_step, card_color_of_int, 2) in
+    (
+    assert_true(test_step, "succes 2", test_is_success(test_result));
+    test_end(test_step)
+    )
+;;
+
+let test_card_color_of_int_b1(status : t_test_status) : unit = 
+  let test_step : t_test_step = test_start(status,"card_color_of_int_b1") in
+  let test_result : t_card_color t_test_result = test_exec(test_step, card_color_of_int, 4) in
+    (
+    assert_true(test_step, "succes 4", test_is_success(test_result));
+    test_end(test_step)
+    )
+;;
 
 (* 2 tests pour des valeurs erronees *)
 
