@@ -71,33 +71,33 @@ let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
 (* Paramétrage *)
 (* Question 4 *)
 
-type t_param = {cardNB : int ; playerNB : int ; boardNB : int ; cardPerTurnNB : int ; turnNB : int};;
+type t_param = {cardNb : int ; playerNb: int ; boardNb : int ; cardPerTurnNb : int ; turnNb : int};;
 
 (* Question 4 *)
-let get_cardNB(prm : t_param) : int =
-	prm.cardNB;;
+let get_cardNb(prm : t_param) : int =
+	prm.cardNb;;
 
-let get_playerNB(prm : t_param) : int =
-	prm.playerNB;;
+let get_playerNb(prm : t_param) : int =
+	prm.playerNb;;
 
-let get_boardNB(prm : t_param) : int =
-	prm.boardNB;;
+let get_boardNb(prm : t_param) : int =
+	prm.boardNb;;
 
-let get_cardPerTurnNB(prm : t_param) : int =
-	prm.cardPerTurnNB;;
+let get_cardPerTurnNb(prm : t_param) : int =
+	prm.cardPerTurnNb;;
 
-let get_turnNB(prm : t_param) : int =
-	prm.turnNB;;
+let get_turnNb(prm : t_param) : int =
+	prm.turnNb;;
 
 (* Question 5 *)
 let valid_param(prm : t_param) : bool =
-	(get_cardPerTurnNB(prm) * get_playerNB(prm) * get_turnNB(prm) + get_boardNB(prm)) == get_cardNB(prm);;
+	(get_cardPerTurnNb(prm) * get_playerNb(prm) * get_turnNb(prm) + get_boardNb(prm)) == get_cardNb(prm);;
 
 (* Initialisation du deck *)
 (* Question 6 *)
 let init_deck(prm : t_param) : t_card list =
 (
-	if get_cardNB(prm) <> 52
+	if get_cardNb(prm) <> 52
 	then failwith("Error : Card number is different from 52")
 	else (
 		if not (valid_param(prm))
@@ -115,8 +115,8 @@ let m_player(number : int) : t_player =
 (* Réalisation des joueurs *)
 (* Question 10 *)
 let init_player(param : t_param) : t_player array =
-	let player_arr = arr_make(param.playerNB, m_player(0)) in
-	for i = 0 to param.playerNB -1
+	let player_arr = arr_make(param.playerNb, m_player(0)) in
+	for i = 0 to param.playerNb -1
 	do
 		player_arr.(i) <- m_player(i+1)
 	done;
