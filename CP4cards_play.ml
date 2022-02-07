@@ -128,6 +128,9 @@ let init_players(param : t_param) : t_player array =
 
 (* Distribution des cartes aux joueurs *)
 (* Question 2.10 *)
+let p = {cardNb = 52 ; playerNb=4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3};;
+let players = init_players(p);;
+let deck = ref(init_deck_52());;
 
 let distribute(players, deck, p : t_player array * t_card list ref * t_param) : unit =
 	for i = 0 to get_playerNb(p)-1
