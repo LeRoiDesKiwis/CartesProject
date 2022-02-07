@@ -16,7 +16,7 @@ let m_card(card_col, card_rank : t_card_color * t_card_rank) : t_card =
   {color = card_col ; rank = card_rank} 
 
 (* Calcul d'un paquet de 52 cartes *)
-(* Question 1 *)
+(* Question 1.1 *)
 
 let card_color_of_int(i : int) : t_card_color =
 	if i < 1 || i > 4
@@ -45,7 +45,7 @@ let card_of_int_52(i : int) : t_card =
   else {color = card_color_of_int(((i-1)/13)+1) ; rank = card_rank_of_int_52(((i-1) mod 13)+1)}
 ;;
 
-(* Question 2 *)
+(* Question 1.2 *)
 
 let rec init_deck_52_aux(i : int) : t_card list =
 	if i = 0
@@ -58,7 +58,7 @@ let init_deck_52() : t_card list =
 ;;
 
 (* Mélange d'un paquet de 52 cartes *)
-(*Question 3*)
+(*Question 1.3*)
 
 let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
   if deck_len <= 0
@@ -71,11 +71,10 @@ let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
 );;
 
 (* Paramétrage *)
-(* Question 4 *)
+(* Question 1.4 *)
 
 type t_param = {cardNb : int ; playerNb: int ; boardNb : int ; cardPerTurnNb : int ; turnNb : int};;
 
-(* Question 4 *)
 let get_cardNb(prm : t_param) : int =
 	prm.cardNb;;
 
@@ -91,12 +90,12 @@ let get_cardPerTurnNb(prm : t_param) : int =
 let get_turnNb(prm : t_param) : int =
 	prm.turnNb;;
 
-(* Question 5 *)
+(* Question 1.5 *)
 let valid_param(prm : t_param) : bool =
 	(get_cardPerTurnNb(prm) * get_playerNb(prm) * get_turnNb(prm) + get_boardNb(prm)) == get_cardNb(prm);;
 
 (* Initialisation du deck *)
-(* Question 6 *)
+(* Question 1.6 *)
 let init_deck(prm : t_param) : t_card list =
 (
 	if get_cardNb(prm) <> 52
@@ -108,14 +107,14 @@ let init_deck(prm : t_param) : t_card list =
 	)
 );;
 
-(* Question 8 *)
+(* Question 1.8 *)
 type t_player = {id: int; hand : t_card list ref; cemetery : t_card list ref};;
 
 let m_player(number : int) : t_player =
 {id = number; cemetery = ref [] ; hand = ref []}
 
 (* Réalisation des joueurs *)
-(* Question 10 *)
+(* Question 1.10 *)
 let init_players(param : t_param) : t_player array =
 	let player_arr = arr_make(param.playerNb, m_player(0)) in
 	for i = 0 to param.playerNb -1
@@ -124,3 +123,9 @@ let init_players(param : t_param) : t_player array =
 	done;
 	player_arr
 ;;
+
+(* Distribution des cartes aux joueurs *)
+(* Question 2.10 *)
+
+let distribute(players, deck, p : t_player array * t_card list ref * t_param) : unit =
+	
