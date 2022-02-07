@@ -301,11 +301,13 @@ let test_init_players(status : t_test_status) : unit =
     then 
       (
       let t : t_player array = test_get(test_result) in
+      let pNB : int = p52.playerNb in
         for i = 0 to 3
         do
           assert_equals(test_step, "number"^string_of_int(i), t.(i).id, i + 1) ;
           assert_equals(test_step, "hand", !(t.(i).hand), []) ;
           assert_equals(test_step, "cemetery", !(t.(i).cemetery), []) ;
+          assert_equals(test_step, "len", arr_len(t), pNB);
         done
       )
     else test_error(test_step) ;
