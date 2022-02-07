@@ -75,6 +75,8 @@ let rec shuffle(deck, deck_len : t_card list * int) : t_card list = (
 
 type t_param = {cardNb : int ; playerNb: int ; boardNb : int ; cardPerTurnNb : int ; turnNb : int};;
 
+let prm = {cardNb = 52; playerNb = 4; boardNb = 4; cardPerTurnNb = 4; turnNb = 3};;
+
 let get_cardNb(prm : t_param) : int =
 	prm.cardNb;;
 
@@ -128,4 +130,14 @@ let init_players(param : t_param) : t_player array =
 (* Question 2.10 *)
 
 let distribute(players, deck, p : t_player array * t_card list ref * t_param) : unit =
-	
+	for i = 0 to get_playerNb(p)-1
+	do
+		players.(i).hand := add_lst(!(players.(i).hand), lst(!deck));
+		deck := rem_lst(!deck);
+	done
+
+let players : t_player array = [|m_player(0); m_player(1); m_player(2); m_player(3)|];;
+
+let deck : ((t_card list) ref) = ref deck;;
+
+distribute(players, deck, prm);;
