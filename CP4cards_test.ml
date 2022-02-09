@@ -322,16 +322,18 @@ let test_init_players(status : t_test_status) : unit =
 
 let test_distribute_structural(status : t_test_status) : unit =
 	let test_step : t_test_step = test_start(status,"distribute") and 
-       prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} and
-       players : t_player array = init_players(prm) and
-       deck : t_card list = init_deck(prm) and
-       len_deck : int = len(deck)
-	in
-	let test_result : (t_player array) t_test_result = test_exec(test_step, distribute, p52) in
-	(
+       prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+    let players : t_player array = init_players(prm) and
+       deck : t_card list = init_deck(prm) in
+	let test_result : (t_player array) t_test_result = test_exec(test_step, distribute, prm) in
+		(
 		if test_is_success(test_result)
-		then 
-			assert_equals
+		then( 
+			for i=0 to 3
+			do
+				assert_false(test_step, "distribute_4", list_contains_value(deck, players.(i).hand));
+			done
+			)
 		else test_error(test_step) ;
 		test_end(test_step)
 		)
@@ -364,7 +366,9 @@ let test_run() : unit =
 
     (* to be completed with the tests defined above *)
     (* when the corresponding functions are developed *)
-
+    
+    (* test de distribute *)
+    test_distribute_structural(alltests);
 
     (* Print test status at the end *)
     print_test_report(alltests)

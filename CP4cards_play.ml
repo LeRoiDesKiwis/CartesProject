@@ -127,16 +127,18 @@ let init_players(param : t_param) : t_player array =
 (* Distribution des cartes aux joueurs *)
 (* Question 2.10 *)
 
-(* variables de tests
+(*variables de tests
 let prm = {cardNb = 52; playerNb = 4; boardNb = 4; cardPerTurnNb = 4; turnNb = 3};;
-let players :t_player array = init_players(prm);;
-let deck : t_card list = init_deck(prm);;
-let deck : ((t_card list) ref) = ref deck;;*)
+let players : t_player array = init_players(prm);;
+let deck : ((t_card list) ref) = ref(init_deck(prm));;*)
 
 let distribute(players, deck, p : t_player array * t_card list ref * t_param) : unit =
 	for i = 0 to get_playerNb(p)-1
 	do
-		players.(i).hand := add_lst(!(players.(i).hand), lst(!deck));
-		deck := rem_lst(!deck);
+		if !deck != []
+		then( 
+			players.(i).hand := add_fst(!(players.(i).hand), fst(!deck));
+			deck := rem_fst(!deck);
+		)
 	done
 ;;
