@@ -315,6 +315,34 @@ let test_init_players(status : t_test_status) : unit =
     )
 ;;
 
+let test_init_players(status : t_test_status) : unit = 
+  let test_step : t_test_step = test_start(status,"distribute") and 
+       prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} and
+       players :t_player array = init_players(prm) and
+       deck : t_card list = init_deck(prm) and
+       len_deck : int = len(deck)
+  in
+  let test_result : (t_player array) t_test_result = test_exec(test_step, init_players, p52, deck, players) in
+    (
+    if test_is_success(test_result)
+    then 
+      (
+      (*let t : t_player array = test_get(test_result) in
+      let pNB : int = p52.playerNb in
+        for i = 0 to 3
+        do
+          assert_equals(test_step, "number"^string_of_int(i), t.(i).id, i + 1) ;
+          assert_equals(test_step, "hand", !(t.(i).hand), []) ;
+          assert_equals(test_step, "cemetery", !(t.(i).cemetery), []) ;
+          assert_equals(test_step, "len", arr_len(t), pNB);
+        done*)
+        assert_equals(test_step, "deck", len(deck), len_deck)
+      )
+    else test_error(test_step) ;
+    test_end(test_step)
+    )
+;;
+
 
 (* ---------------------------- *)
 (*     fonction de test         *)
