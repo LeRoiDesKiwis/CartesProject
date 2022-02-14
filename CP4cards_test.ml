@@ -321,21 +321,27 @@ let test_init_players(status : t_test_status) : unit =
 (* ---------------------------- *)
 
 let test_distribute_structural(status : t_test_status) : unit =
-	let test_step : t_test_step = test_start(status,"distribute") and 
-       prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
-    let players : t_player array = init_players(prm) and
-       deck : t_card list = init_deck(prm) in
-	let test_result : (t_player array) t_test_result = test_exec(test_step, distribute, prm) in
+	let test_step : t_test_step = test_start(status,"distribute") in
+    let prm1 : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+    let players1 : t_player array = init_players(prm1) in
+    let deck1 : t_card list ref = ref [] in
+    let prm2 : t_param = {cardNb = 2 ; playerNb = 3 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+    let players2 : t_player array = init_players(prm2) in
+    let deck2 : t_card list ref =  ref [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}] in
+	let test_result1 : (unit) t_test_result = test_exec(test_step, distribute, (players1, deck1, prm1)) in
+	let test_result2 : (unit) t_test_result = test_exec(test_step, distribute, (players2, deck2, prm2)) in
 		(
-		if test_is_success(test_result)
-		then( 
-			for i=0 to 3
-			do
-				assert_false(test_step, "distribute_4", list_contains_value(deck, players.(i).hand));
-			done
+		if test_is_success(test_result1)
+		then(
+			assert_true(test_step, "test_deck_empty", players1 = [|{id = 1; hand = {contents = []}; cemetery = {contents = []}};
+																{id = 2; hand = {contents = []}; cemetery = {contents = []}}|])
 			)
 		else test_error(test_step) ;
+		if test_is_success(test_result2)
+		then(
+			assert_true(test_step, "test_deck_2", !deck2 = []) ;
 		test_end(test_step)
+		)
 		)
 ;;
 

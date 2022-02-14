@@ -142,3 +142,11 @@ let distribute(players, deck, p : t_player array * t_card list ref * t_param) : 
 		)
 	done
 ;;
+
+(* Question 13 *)
+let distribute_4cards(players, deck, p : t_player array * t_card list ref * t_param) : unit =
+	while !deck != []
+	do
+		distribute(players, deck, p)
+	done
+;;
