@@ -333,8 +333,7 @@ let test_distribute_structural(status : t_test_status) : unit =
 		(
 		if test_is_success(test_result1)
 		then(
-			assert_true(test_step, "test_deck_empty", players1 = [|{id = 1; hand = {contents = []}; cemetery = {contents = []}};
-																{id = 2; hand = {contents = []}; cemetery = {contents = []}}|])
+			assert_true(test_step, "test_deck_empty", players1 = init_players(prm1))
 			)
 		else test_error(test_step) ;
 		if test_is_success(test_result2)
