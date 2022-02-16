@@ -322,28 +322,40 @@ let test_init_players(status : t_test_status) : unit =
 
 let test_distribute_structural(status : t_test_status) : unit =
 	let test_step : t_test_step = test_start(status,"distribute") in
-    let prm1 : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
-    let players1 : t_player array = init_players(prm1) in
-    let deck1 : t_card list ref = ref [] in
-    let prm2 : t_param = {cardNb = 2 ; playerNb = 3 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
-    let players2 : t_player array = init_players(prm2) in
-    let deck2 : t_card list ref =  ref [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}] in
-	let test_result1 : (unit) t_test_result = test_exec(test_step, distribute, (players1, deck1, prm1)) in
-	let test_result2 : (unit) t_test_result = test_exec(test_step, distribute, (players2, deck2, prm2)) in
+    let prm : t_param = {cardNb = 52 ; playerNb = 3 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+    let players : t_player array = init_players(prm) in
+    let deck : t_card list ref = ref [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}] in
+	let test_result : (unit) t_test_result = test_exec(test_step, distribute, (players, deck, prm)) in
 		(
-		if test_is_success(test_result1)
+		if test_is_success(test_result)
 		then(
-			assert_true(test_step, "test_deck_empty", players1 = init_players(prm1))
+			assert_equals(test_step, "hand_p1", !(players.(0).hand), [{color = SPADE; rank = 2}]) ;
+			assert_equals(test_step, "hand_p2", !(players.(1).hand), [{color = CLUB; rank = 9}]) ;
+			assert_equals(test_step, "hand_p3", !(players.(2).hand), []) ;
+			assert_equals(test_step, "test_deck_2", !deck, []) ;
 			)
 		else test_error(test_step) ;
-		if test_is_success(test_result2)
-		then(
-			assert_true(test_step, "test_deck_2", !deck2 = []) ;
 		test_end(test_step)
-		)
 		)
 ;;
 
+let test_distribute_4cards_functional(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"distribute_4cards") in
+	let prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+    let players : t_player array = init_players(prm) in
+    let deck : t_card list ref = ref init_deck(prm) in
+    let test_result : (unit) t_test_result = test_exec(test_step, distribute_4cards, (players, deck, prm)) in
+		(
+		if test_is_succes(test_result)
+		then(
+			for i=0 to 3
+			do
+				assert_false(test_step, "test_delivery", 
+			)
+		else test_error(test_step) ;
+		test_end(test_step)
+		)
+;;
 (* ---------------------------- *)
 (*     fonction de test         *)
 (* ---------------------------- *)
@@ -374,6 +386,8 @@ let test_run() : unit =
     
     (* test de distribute *)
     test_distribute_structural(alltests);
+    
+    (* test de distribute_4cards *)
 
     (* Print test status at the end *)
     print_test_report(alltests)
