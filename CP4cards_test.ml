@@ -339,6 +339,7 @@ let test_distribute_structural(status : t_test_status) : unit =
 		)
 ;;
 
+(*
 let test_distribute_4cards_functional(status : t_test_status) : unit =
 	let test_step : t_test_step = test_start(status,"distribute_4cards") in
 	let prm : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
@@ -355,7 +356,19 @@ let test_distribute_4cards_functional(status : t_test_status) : unit =
 		else test_error(test_step) ;
 		test_end(test_step)
 		)
-;;
+;;*)
+
+
+(* ---------------------------- *)
+(*   compute_maxlen_cemetery    *)
+(* ---------------------------- *)
+
+let test_compute_maxlen_cemetery(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"compute_maxlen_cemetery") in
+	let players : t_player array = 
+	let p : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3}
+
+
 (* ---------------------------- *)
 (*     fonction de test         *)
 (* ---------------------------- *)

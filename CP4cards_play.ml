@@ -150,3 +150,17 @@ let distribute_4cards(players, deck, p : t_player array * t_card list ref * t_pa
 		distribute(players, deck, p)
 	done
 ;;
+
+(* Question 14 *)
+
+let rec fill_board_aux(nb, deck, board : int * t_card list ref * t_card list ref) : unit =
+	if nb != 0 && !deck != []
+	then 
+		board := add_fst(!board, fst(!deck)) ;
+		deck := rem_fst(!deck);
+		fill_board_aux(nb-1, deck, board)
+;;
+
+let fill_board(board, deck, p : t_card list ref * t_card list ref * t_param) : unit =
+	fill_board_aux(get_boardNb(p), deck, board)
+;;
