@@ -143,7 +143,7 @@ let distribute(players, deck, p : t_player array * t_card list ref * t_param) : 
 	done
 ;;
 
-(* Question 13 *)
+(* Question 2.13 *)
 let distribute_4cards(players, deck, p : t_player array * t_card list ref * t_param) : unit =
 	while !deck != []
 	do
@@ -151,7 +151,7 @@ let distribute_4cards(players, deck, p : t_player array * t_card list ref * t_pa
 	done
 ;;
 
-(* Question 14 *)
+(* Question 2.14 *)
 
 let rec fill_board_aux(nb, deck, board : int * t_card list ref * t_card list ref) : unit =
 	if nb != 0 && !deck != []
@@ -163,4 +163,14 @@ let rec fill_board_aux(nb, deck, board : int * t_card list ref * t_card list ref
 
 let fill_board(board, deck, p : t_card list ref * t_card list ref * t_param) : unit =
 	fill_board_aux(get_boardNb(p), deck, board)
+;;
+
+let compute_maxlen_cemetery(players, p : t_player array * t_param) : int =
+	let max : int ref = ref 0 in
+	for i=0 to get_playerNb(p) -1
+	do
+		if len(!(players.(i).cemetery)) > !max
+		then max := len(!(players.(i).cemetery))
+	done ;
+	!max
 ;;

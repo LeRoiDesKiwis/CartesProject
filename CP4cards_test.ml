@@ -362,13 +362,12 @@ let test_distribute_4cards_functional(status : t_test_status) : unit =
 (* ---------------------------- *)
 (*   compute_maxlen_cemetery    *)
 (* ---------------------------- *)
-
+(*
 let test_compute_maxlen_cemetery(status : t_test_status) : unit =
 	let test_step : t_test_step = test_start(status,"compute_maxlen_cemetery") in
-	let players : t_player array = 
 	let p : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3}
-
-
+	let players : t_player array = {id = 1; cemetery = for i=0 to 5 do card_of_int_52(i) done ; hand = ref []}
+*)
 (* ---------------------------- *)
 (*     fonction de test         *)
 (* ---------------------------- *)
