@@ -165,6 +165,8 @@ let fill_board(board, deck, p : t_card list ref * t_card list ref * t_param) : u
 	fill_board_aux(get_boardNb(p), deck, board)
 ;;
 
+(* Question 2.16 *)
+
 let compute_maxlen_cemetery(players, p : t_player array * t_param) : int =
 	let max : int ref = ref 0 in
 	for i=0 to get_playerNb(p) -1
@@ -173,4 +175,17 @@ let compute_maxlen_cemetery(players, p : t_player array * t_param) : int =
 		then max := len(!(players.(i).cemetery))
 	done ;
 	!max
+;;
+
+(* Question 2.17 *)
+
+let compute_winners(players, p : t_player array * t_param) int list =
+	let winners : int list ref = ref [] in
+	let max : int = compute_maxlen_cemetery(players, p) in
+	for i=0 to get_playerNb(p) -1
+	do
+		if len(!(players.(i).cemetery)) = max
+		then winners := add_fst(!winners, i+1)
+	done ;
+	!winners
 ;;

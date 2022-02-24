@@ -362,12 +362,44 @@ let test_distribute_4cards_functional(status : t_test_status) : unit =
 (* ---------------------------- *)
 (*   compute_maxlen_cemetery    *)
 (* ---------------------------- *)
-(*
-let test_compute_maxlen_cemetery(status : t_test_status) : unit =
-	let test_step : t_test_step = test_start(status,"compute_maxlen_cemetery") in
-	let p : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3}
-	let players : t_player array = {id = 1; cemetery = for i=0 to 5 do card_of_int_52(i) done ; hand = ref []}
-*)
+
+let test_compute_maxlen_cemetery_a(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"compute_maxlen_cemetery_a") in
+	let p : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+	let players : t_player array = [|{id = 1; hand = {contents = []}; cemetery = {contents = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}]}};
+									{id = 2; hand = {contents = []}; cemetery = {contents = [{color = HEART; rank = 2};{color = SPADE; rank = 5}]}};
+									{id = 3; hand = {contents = []}; cemetery = {contents = [{color = DIAMOND; rank = 7}; {color = SPADE; rank = 8}]}};
+									{id = 4; hand = {contents = []}; cemetery = {contents = [{color = DIAMOND; rank = 10};{color = HEART; rank = 11}; {color = HEART; rank = 3};
+									{color = HEART; rank = 13}]}}|] in
+	let test_result : int t_test_result = test_exec(test_step, compute_maxlen_cemetery, (players, p)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_1_max", test_get(test_result), 4);
+			)
+		else test_error(test_step);
+		test_end(test_step)
+		)
+;;
+
+let test_compute_maxlen_cemetery_b(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"compute_maxlen_cemetery_b") in
+	let p : t_param = {cardNb = 52 ; playerNb = 4 ; boardNb = 4 ; cardPerTurnNb = 4 ; turnNb = 3} in
+	let players : t_player array = [|{id = 1; hand = {contents = []}; cemetery = {contents = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}]}};
+									{id = 2; hand = {contents = []}; cemetery = {contents = [{color = HEART; rank = 2};{color = SPADE; rank = 5}]}};
+									{id = 3; hand = {contents = []}; cemetery = {contents = [{color = DIAMOND; rank = 7}; {color = SPADE; rank = 8}]}};
+									{id = 4; hand = {contents = []}; cemetery = {contents = [{color = DIAMOND; rank = 10};{color = HEART; rank = 11}; {color = HEART; rank = 3};]}}|] in
+	let test_result : int t_test_result = test_exec(test_step, compute_maxlen_cemetery, (players, p)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_2_max", test_get(test_result), 3);
+			)
+		else test_error(test_step);
+		test_end(test_step)
+		)
+;;
+
 (* ---------------------------- *)
 (*     fonction de test         *)
 (* ---------------------------- *)
@@ -399,7 +431,9 @@ let test_run() : unit =
     (* test de distribute *)
     test_distribute_structural(alltests);
     
-    (* test de distribute_4cards *)
+    (* test de compute_maxlen_cemetery *)
+    test_compute_maxlen_cemetery_a(alltests);
+    test_compute_maxlen_cemetery_b(alltests);
 
     (* Print test status at the end *)
     print_test_report(alltests)
