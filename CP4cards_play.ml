@@ -190,18 +190,6 @@ let compute_winners(players, p : t_player array * t_param) int list =
 	!winners
 ;;
 
-let rec find_index_in_board_aux(board, card, i : t_card list * t_card * int) : bool * int = (
-    if i >= len(board)
-    then false, -1
-    else if (nth(board, i)).rank == card.rank
-    then true, i
-    else find_index_in_board_aux(board, card, i+1);
-)
-
-let find_index_in_board(board, card : t_card list * t_card) : bool * int = (
-    find_index_in_board_aux(board, card, 0);
-)
-
 (* Question 2.19 *)
 let same_card_rank(card_1, card_2: t_card * t_card) : bool =
 	card_1.rank = card_2.rank
@@ -227,3 +215,48 @@ let find_index_in_board(board, card : t_card list * t_card) : bool * int =
 	done ;
 	(!result, !index)
 ;;
+
+(* Question 2.21 *)
+
+
+let rec find_index_in_board_aux(board, card, i : t_card list * t_card * int) : bool * int = (
+    if i >= len(board)
+    then false, -1
+    else if (nth(board, i)).rank == card.rank
+    then true, i
+    else find_index_in_board_aux(board, card, i+1);
+)
+
+let find_index_in_board(board, card : t_card list * t_card) : bool * int = (
+    find_index_in_board_aux(board, card, 0);
+)
+
+(* Question 2.22 *)
+
+let find_pair(board, hand : t_card list * t_card list) : bool * int * int =
+	let index_1 : int ref = ref 0 in
+	let index_2 : int ref = ref 0 in
+	let result : bool ref = ref false in
+	let board_bis : t_card list ref = ref board in
+	let hand_bis : t_card list ref = ref hand in
+	for i=0 to len(board) -1
+	do
+		for j=0 to len(hand) -1
+		do
+			if (fst(!board_bis)).rank = (fst(!hand_bis)).rank
+			then(
+				index_1 := i+1;
+				index_2 := j+1;
+				hand_bis := rem_fst(!hand_bis);
+				)
+			else(
+				hand_bis := rem_fst(!hand_bis);
+				)
+		done;
+		hand_bis := hand;
+		rem_fst(!board_bis);	
+	done ;
+	(!result, !index_1, !index_2)
+;;
+
+	
