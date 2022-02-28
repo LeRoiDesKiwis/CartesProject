@@ -471,8 +471,8 @@ let test_run() : unit =
     test_compute_maxlen_cemetery_b(alltests);
 
 	(* test de find_index_in_board *)
-	test_find_index_in_board_functional_false(alltests);
 	test_find_index_in_board_functional_true(alltests);
+	test_find_index_in_board_functional_false(alltests);
 	
     (* Print test status at the end *)
     print_test_report(alltests)

@@ -213,12 +213,17 @@ let find_index_in_board(board, card : t_card list * t_card) : bool * int =
 	let index : int ref = ref 0 in
 	let result : bool ref = ref false in
 	let board_bis : t_card list ref = ref board in
-	for i=1 to len(board)
+	for i=0 to len(board) -1
 	do
-		if (fst(!board_bis)).rank = card.rank
-		then index := i ;
+		if (fst(!board_bis)).rank != card.rank
+		then(
+			board_bis := rem_fst(!board_bis);
+			)
+		else(
+			index := i+1 ;
 			result := true ;
-			board_bis := rem_fst(!board_bis)
+			board_bis := rem_fst(!board_bis);
+			)
 	done ;
 	(!result, !index)
 ;;
