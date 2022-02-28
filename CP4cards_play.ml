@@ -189,3 +189,15 @@ let compute_winners(players, p : t_player array * t_param) int list =
 	done ;
 	!winners
 ;;
+
+let rec find_index_in_board_aux(board, card, i : t_card list * t_card * int) : bool * int = (
+    if i >= len(board)
+    then false, -1
+    else if (nth(board, i)).rank == card.rank
+    then true, i
+    else find_index_in_board_aux(board, card, i+1);
+)
+
+let find_index_in_board(board, card : t_card list * t_card) : bool * int = (
+    find_index_in_board_aux(board, card, 0);
+)
