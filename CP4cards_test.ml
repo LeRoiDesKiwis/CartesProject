@@ -401,6 +401,41 @@ let test_compute_maxlen_cemetery_b(status : t_test_status) : unit =
 ;;
 
 (* ---------------------------- *)
+(*     find_index_in_board      *)
+(* ---------------------------- *)
+
+let test_find_index_in_board_functional_true(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"find_index_in_board_true") in
+    let board : t_card list = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}; {color = DIAMOND; rank = 10}] in
+    let card : t_card = {color = HEART; rank = 7} in
+	let test_result : (bool * int) t_test_result = test_exec(test_step, find_index_in_board, (board, card)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_true", test_get(test_result), (true, 3));
+			)
+		else test_error(test_step) ;
+		test_end(test_step)
+		)
+;;
+
+let test_find_index_in_board_functional_false(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"find_index_in_board_false") in
+    let board : t_card list = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}; {color = DIAMOND; rank = 10}] in
+    let card : t_card = {color = HEART; rank = 3} in
+	let test_result : (bool * int) t_test_result = test_exec(test_step, find_index_in_board, (board, card)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_false",test_get(test_result), (false, 0));
+			)
+		else test_error(test_step) ;
+		test_end(test_step)
+		)
+;;
+
+
+(* ---------------------------- *)
 (*     fonction de test         *)
 (* ---------------------------- *)
 
@@ -435,6 +470,10 @@ let test_run() : unit =
     test_compute_maxlen_cemetery_a(alltests);
     test_compute_maxlen_cemetery_b(alltests);
 
+	(* test de find_index_in_board *)
+	test_find_index_in_board_functional_false(alltests);
+	test_find_index_in_board_functional_true(alltests);
+	
     (* Print test status at the end *)
     print_test_report(alltests)
     )
