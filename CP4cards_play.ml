@@ -260,3 +260,21 @@ let find_pair(board, hand : t_card list * t_card list) : bool * int * int =
 ;;
 
 	
+let rec find_pair_aux(board, hand, i1, i2 : t_card list * t_card list * int * int) : bool * int * int =
+(
+	if i2 >= len(hand)
+	then find_pair_aux(board, hand, i1+1, 0)
+
+	else if i1 >= len(board)
+	then false, -1, -1
+
+	else if (nth(board, i1)).rank == (nth(hand, i2)).rank
+	then true, i1+1, i2+1
+
+	else find_pair_aux(board, hand, i1, i2+1)
+)
+
+let rec find_pair_rec(board, hand : t_card list * t_card list) : bool * int * int =
+(
+	find_pair_aux(board, hand, 0, 0);
+)
