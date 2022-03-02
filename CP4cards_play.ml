@@ -247,6 +247,7 @@ let find_pair(board, hand : t_card list * t_card list) : bool * int * int =
 			then(
 				index_1 := i+1;
 				index_2 := j+1;
+				result := true;
 				hand_bis := rem_fst(!hand_bis);
 				)
 			else(
@@ -278,3 +279,14 @@ let rec find_pair_rec(board, hand : t_card list * t_card list) : bool * int * in
 (
 	find_pair_aux(board, hand, 0, 0);
 )
+
+(* Question 2.24 *)
+
+let play_one_player(board, players, ind_player : t_card list ref * t_player array * int) : unit =
+	if players.hand = []
+	then failwith("Error play_one_player : empty hand")
+	else
+		let pair : bool * int * int = find_pair(board, players.hand) in
+		if pair != (false, 0, 0)
+		then 
+
