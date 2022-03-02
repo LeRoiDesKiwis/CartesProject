@@ -434,6 +434,39 @@ let test_find_index_in_board_functional_false(status : t_test_status) : unit =
 		)
 ;;
 
+(* ---------------------------- *)
+(*        find_pair             *)
+(* ---------------------------- *)
+
+let test_find_pair_functional_true(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"find_pair_true") in
+    let board : t_card list = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}; {color = DIAMOND; rank = 10}] in
+    let hand : t_card list = [{color = CLUB; rank = 4}; {color = DIAMOND; rank = 2}; {color = SPADE; rank = 8}; {color = DIAMOND; rank = 1}] in
+	let test_result : (bool * int * int) t_test_result = test_exec(test_step, find_pair, (board, hand)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_true", test_get(test_result), (true, 1, 2));
+			)
+		else test_error(test_step) ;
+		test_end(test_step)
+		)
+;;
+
+let test_find_pair_functional_false(status : t_test_status) : unit =
+	let test_step : t_test_step = test_start(status,"find_index_in_board_false") in
+    let board : t_card list = [{color = SPADE; rank = 2}; {color = CLUB; rank = 9}; {color = CLUB; rank = 7}; {color = DIAMOND; rank = 10}] in
+    let hand : t_card list = [{color = CLUB; rank = 4}; {color = DIAMOND; rank = 3}; {color = SPADE; rank = 8}; {color = DIAMOND; rank = 1}] in
+	let test_result : (bool * int * int) t_test_result = test_exec(test_step, find_pair, (board, hand)) in
+		(
+		if test_is_success(test_result)
+		then(
+			assert_equals(test_step, "test_false", test_get(test_result), (false, 0, 0));
+			)
+		else test_error(test_step) ;
+		test_end(test_step)
+		)
+;;
 
 (* ---------------------------- *)
 (*     fonction de test         *)
@@ -473,6 +506,10 @@ let test_run() : unit =
 	(* test de find_index_in_board *)
 	test_find_index_in_board_functional_true(alltests);
 	test_find_index_in_board_functional_false(alltests);
+	
+	(* test de find_pair *)
+	test_find_pair_functional_true(alltests);
+	test_find_pair_functional_false(alltests);
 	
     (* Print test status at the end *)
     print_test_report(alltests)

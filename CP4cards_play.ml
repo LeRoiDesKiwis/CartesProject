@@ -221,9 +221,9 @@ let find_index_in_board(board, card : t_card list * t_card) : bool * int =
 
 let rec find_index_in_board_aux(board, card, i : t_card list * t_card * int) : bool * int = (
     if i >= len(board)
-    then false, -1
+    then false, 0
     else if (nth(board, i)).rank == card.rank
-    then true, i
+    then true, i+1
     else find_index_in_board_aux(board, card, i+1);
 )
 
@@ -254,7 +254,7 @@ let find_pair(board, hand : t_card list * t_card list) : bool * int * int =
 				)
 		done;
 		hand_bis := hand;
-		rem_fst(!board_bis);	
+		board_bis := rem_fst(!board_bis);	
 	done ;
 	(!result, !index_1, !index_2)
 ;;
