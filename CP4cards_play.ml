@@ -283,10 +283,24 @@ let rec find_pair_rec(board, hand : t_card list * t_card list) : bool * int * in
 (* Question 2.24 *)
 
 let play_one_player(board, players, ind_player : t_card list ref * t_player array * int) : unit =
-	if players.hand = []
+	let (result, index_board, index_hand) = find_pair(!board, !(players.(ind_player).hand)) in
+	if !(players.(ind_player).hand) = []
 	then failwith("Error play_one_player : empty hand")
 	else
-		let pair : bool * int * int = find_pair(board, players.hand) in
-		if pair != (false, 0, 0)
-		then 
+		if result = true
+		then(
+			let card_board : t_card = nth(!board, index_board) in
+			let card_hand : t_card = nth(!(players.(ind_player).hand), index_hand) in
+			players.(ind_player).cemetery := add_fst(!(players.(ind_player).cemetery), card_board) ;
+			players.(ind_player).cemetery := add_fst(!(players.(ind_player).cemetery), card_hand) ;
+			board := rem_nth(!board, index_board) ;
+			players.(ind_player).hand := rem_nth(!(players.(ind_player).cemetery), index_hand);
+			)
+		else(
+			let card_select : t_card = fst(!(players.(ind_player).hand)) in
+			board := add_fst(!board, card_select) ;
+			players.(ind_player).hand := rem_fst(!(players.(ind_player).hand)) ;
+			)
+;;
+			
 
